@@ -243,19 +243,24 @@
         if (bo) {
             postData();
             clearcontent();
+
         } else {
             alert("输入格式错误或未输入完整");
         }
     })
 
     function postData() {
-        let formData = new FormData();
+        var formData = new FormData();
         formData.append("parentComment.id", $("[name='parentComment.id']").val());
         formData.append("blog.id", $("[name='blog.id']").val());
         formData.append("nickname", $("[name='nickname']").val());
         formData.append("email", $("[name='email']").val());
         formData.append("content", $("[name='content']").val());
-        console.info(formData);
+        console.info("nickname====="+formData.get("nickname"));
+        console.info("content====="+formData.get("content"));
+        console.info("email====="+formData.get("email"));
+        console.info("blog.id====="+formData.get("blog.id"));
+        console.info("parentComment.id====="+formData.get("parentComment.id"));
         $.ajax({
             url: '/comments/save', /*接口域名地址*/
             type: 'post',
@@ -263,7 +268,7 @@
             contentType: false,
             processData: false,
             success: function (res) {
-                console.log(res.data);
+                console.log(formData);
                 clearcontent();
                 alert("成功");
                 window.location.reload();
@@ -289,7 +294,6 @@
     }
 
     function clearcontent() {
-
         $("input[name='blog.id']").text('');
         $("input[name='parentComment.id']").val(-1);
         $("input[name='content']").text('请输入评论信息......');
