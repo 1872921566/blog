@@ -38,6 +38,7 @@ public class CommentController {
     //发布留言
     @PostMapping("/comments/save")
     public String post(Comment comment){
+        String test;
         LogInfoUtils.log(comment);
         String blogId = comment.getBlog().getId();
         comment.setBlog(blogService.findById(blogId));
