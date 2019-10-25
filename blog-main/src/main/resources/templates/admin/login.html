@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="_fragments ::head(~{::title})">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bolg-管理登录</title>
+	<link rel="stylesheet" type="text/css"  href="../../static/semantic/semantic.min.css" th:href="@{/semantic/semantic.min.css}">
+	<link rel="stylesheet" type="text/css" href="../../static/site/css/index.css" th:href="@{/site/css/index.css}">
+</head>
+<body>
+	<br><br><br><br><br><br>
+	<div class="m-container-small m-padded-tb-large" style="max-width: 30em!important;">
+		<div class="ui container">
+			<div class="ui middle aligned center aligned grid">
+				<div class="column">
+					<h2 class="ui teal image header">
+<!--						<img src="assets/images/logo.png" class="image">-->
+						<div class="content">
+							管理后台登录
+						</div>
+					</h2>
+					<form class="ui large form" method="post" action="/admin/login">
+						<div class="ui  segment">
+							<div class="field">
+								<div class="ui left icon input">
+									<i class="user icon"></i>
+									<input type="text" name="username" placeholder="username">
+								</div>
+							</div>
+							<div class="field">
+								<div class="ui left icon input">
+									<i class="lock icon"></i>
+									<input type="password" name="password" placeholder="password">
+								</div>
+							</div>
+
+							<div class="ui fluid large teal submit button">登   录</div>
+						</div>
+
+						<div class="ui error message mini"></div>
+						<div class="ui message mini negative" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
+
+					</form>
+
+<!--					<div class="ui message">-->
+<!--						New to us? <a href="#">Sign Up</a>-->
+<!--					</div>-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+
+<script
+ src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="../../static/semantic/semantic.min.js" th:src="@{/semantic/semantic.min.js}"></script>
+<script src="../../static/admin/js/admin_fun.js" th:src="@{/admin/js/admin_fun.js}"></script>
+<script>
+	$('.ui.form').form({
+		fields :{
+			username : {
+				identifier :'username',
+				rules:[{
+					type:'empty',
+					prompt:'请输入用户名',
+				}]
+			},
+			password : {
+				identifier :'password',
+				rules:[{
+					type:'empty',
+					prompt:'请输入密码',
+				}]
+			}
+		}
+	});
+</script>
+</html>

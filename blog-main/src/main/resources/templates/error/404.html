@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments ::head(~{::title})">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >404</title>
+    <link rel="stylesheet" type="text/css"  href="../../static/semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/site/css/index.css">
+</head>
+<body>
+<div class="page">
+    <!-- 导航栏 -->
+
+    <nav  class="ui inverted attached segment m-padded-tb-mini m-show-small">
+        <div class="ui container">
+            <div class="ui inverted secondary menu stackable">
+                <h2 class="ui orange header item">Zzx-Blog</h2>
+
+
+            </div>
+        </div>
+        <a href="#" class="ui black icon button m-top-right m-mobile-show" id="showmenu">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <br><br><br><br><br><br><br><br>
+
+    <div class="m-container-small m-padded-tb-massive">
+        <div class="ui error message m-padded-tb-huge">
+            <div class="ui container">
+                <h2>404</h2>
+                <p>抱歉，您访问的资源不存在</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br>
+<footer th:replace="_fragments :: footer" class="ui inverted segment vertical m-padded-tb-massive">
+    <div class="ui container center aligned">
+        <!--			底部按列排 共18份-->
+        <div class="ui divided inverted stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/site/img/footer.png" alt="二维码" class="ui rounded image" style="width: 100px;">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header ">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                    <a href="#" class="item">用户故事</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header ">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: 1872921566@qq.com</a>
+                    <a href="#" class="item">QQ:1872921566</a>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h4 class="ui inverted header ">Blog</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini"> 这个是我的个人博客,里面分享我的写作,编程以及生活中的任何内容,希望可以对你们有所帮助</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-mini"> COPYRIGHT © 2001 - 2019 Sir. ALL RIGHTS RESERVED.<br>
+            ©SSTi Corporation. All rights reserved.<br>
+            粤网文[2017]6666- 9999号|（总）网出证（粤）字第066号
+            <br>
+        </p>
+    </div>
+</footer>
+</body>
+</html>
