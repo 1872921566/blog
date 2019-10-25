@@ -125,12 +125,12 @@
                                 <img src="../../../static/site/img/head.jpeg" th:src="${comment.avatar}" name="avatar">
                             </a>
                             <div class="content">
-                                <a class="author" th:text="${comment.nickname}" name="nickname">Matt</a>
+                                <a class="author" th:text="${comment.nickname}" >Matt</a>
                                 <div class="metadata">
                                     <span class="date" th:text="${comment.createTime}"
                                           name="createTime">Today at 5:42PM</span>
                                 </div>
-                                <div class="text" th:text="${comment.content}" name="content">
+                                <div class="text" th:text="${comment.content}" >
                                     How artistic!
                                 </div>
                                 <div class="actions">
@@ -230,13 +230,8 @@
 </th:block>
 <script src="../../static/site/js/fun.js" th:src="@{/site/js/fun.js}"></script>
 <script>
-    //关闭消息框
-    $('.message .close')
-        .on('click', function () {
-            $(this)
-                .closest('.message')
-                .transition('fade');
-        });
+
+
 
     $('#comment-btn').click(function () {
         var bo = $('.ui.form').form("validate form");
@@ -290,7 +285,6 @@
         var nickname = $(obj).data('commentnickname');
         $("[name='content']").attr("placeholder", "@" + nickname).focus();
         $("[name='parentComment.id']").val(commentid);
-        $(window).scrollTo($('#form'), 500);
     }
 
     function clearcontent() {
