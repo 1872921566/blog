@@ -1,25 +1,16 @@
 package com.geek.blogmain;
 
 import com.geek.bloglib.dao.BlogRepository;
-import com.geek.bloglib.model.Blog;
-import com.geek.bloglib.model.Type;
-import com.geek.bloglib.service.TypeService;
-import com.geek.bloglib.util.MD5Utils;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
+@Slf4j
 public class BlogMainApplicationTests {
 
     @Autowired
@@ -30,6 +21,12 @@ public class BlogMainApplicationTests {
 //        Pageable pageable = new PageRequest(1,10, Sort.Direction.DESC);
 //        List<Blog> content = blogRepository.findByQuery("", pageable).getContent();
 //        System.out.println("content======"+content.toString());
+
+//        List<String> groupYear = blogRepository.findGroupYear();
+//        LogInfoUtils.log(groupYear);
+
+//        List<Blog> year = blogRepository.findByYear("2019");
+//        log.info("year======="+year.get(0).getTitle());
     }
 
 }

@@ -18,15 +18,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import javax.persistence.criteria.*;
+import javax.transaction.Transactional;
+import java.util.*;
 
 @Service
+@Transactional
 public class BlogService {
     
     @Autowired
@@ -34,6 +31,16 @@ public class BlogService {
     
     public Page<Blog> findByQuery(String query, Pageable pageable){
         return  repository.findByQuery(query,pageable);
+    }
+
+    //通过归档/时间阶段查询博客
+    public Map<String,List<Blog>> findByArchives(){
+        List<String> years = repository.findGroupYear();
+        Map<String, List<Blog>> Map = new HashMap<>();
+        for(String year : years){
+            Map.put(year,repository.findByYear(year));
+        }
+        return Map;
     }
 
 
@@ -101,9 +108,23 @@ public class BlogService {
             }
         },pageable);
     }
-    
+
+
+    public Page<Blog> findAll(Pageable pageable,String typeId){
+        return repository.findAll(new Specification<Blog>() {
+            @Override
+            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+                Join join = root.join("tags");
+                return cb.equal(join.get("id"),typeId);
+            }
+        },pageable);
+    }
+
+
     public Blog findById(String id){
+        repository.updateViews(id);
         return  repository.findById(id).get();
+
     }
 
     public void update(String id,Blog blog){

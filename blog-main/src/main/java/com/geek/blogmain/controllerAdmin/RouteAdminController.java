@@ -13,13 +13,9 @@ public class RouteAdminController {
         return "admin/admin_index";
     }
 
-
-
     @RequestMapping("/manager")
     public String routeManager(){
         return "admin/page/admin_manager";
     }
-
-
 
 }

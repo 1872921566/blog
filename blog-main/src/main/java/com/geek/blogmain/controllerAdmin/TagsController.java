@@ -51,8 +51,13 @@ public class TagsController {
     //删除标签
     @GetMapping("/tag/delete")
     public String  delete(@RequestParam String id, RedirectAttributes attributes){
-        service.delete(id);
-        attributes.addFlashAttribute("message","成功删除该分类");
+        if(service.findById(id).getBlogs().size()!=0)
+        {
+            attributes.addFlashAttribute("message","该标签存在文章，无法删除");
+        }else {
+            service.delete(id);
+            attributes.addFlashAttribute("message","成功删除该分类");
+        }
         return "redirect:/admin/tag/tags";
     }
     //保存标签

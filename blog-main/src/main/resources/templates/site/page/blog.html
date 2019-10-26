@@ -41,7 +41,7 @@
             <div class="ui top attached segment ">
                 <div class="ui link  list horizontal">
                     <div class="item">
-                        <img src="https://picsum.photos/id/866/100/100" alt="#" class="ui avatar image">
+                        <img src="#" alt="#" class="ui avatar image" th:src="${blog.user.avatar}">
                         <div class="content"><a href="#" class="header">[[${blog.user.nickname}]]</a></div>
                     </div>
                     <div class="item">
@@ -54,7 +54,7 @@
             </div>
             <!--			图片区域-->
             <div class="ui attached segment ">
-                <img src="https://picsum.photos/id/866/800/450" alt="详情图片" class="rounded ui fluid image">
+                <img src="https://picsum.photos/id/866/800/450" alt="详情图片" class="rounded ui fluid image" th:src="${blog.firstPicture}">
             </div>
             <!--			内容-->
             <div class="ui attached padded segment">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <!--				赞赏功能-->
-                <div class="ui segment center aligned basic">
+                <div class="ui segment center aligned basic" th:if="${blog.appreciation}">
                     <button id="payButton" class="ui button basic teal circular">
                         赞善
                     </button>
@@ -98,7 +98,7 @@
             </div>
 
             <!--			博客信息-->
-            <div class="ui attached message positive">
+            <div class="ui attached message positive" th:if="${blog.shareStatement}">
                 <div class="ui middle aligned grid">
                     <div class="eleven wide column">
                         <ui class="list ">
@@ -125,7 +125,10 @@
                                 <img src="../../../static/site/img/head.jpeg" th:src="${comment.avatar}" name="avatar">
                             </a>
                             <div class="content">
-                                <a class="author" th:text="${comment.nickname}" >Matt</a>
+                                <a class="author">
+                                    <span  th:text="${comment.nickname}" > Matt</span>
+                                    <div class="ui mini basic orange left pointing label m-padded-tb-mini" th:if="${comment.isAdmin()}">博主</div>
+                                </a>
                                 <div class="metadata">
                                     <span class="date" th:text="${comment.createTime}"
                                           name="createTime">Today at 5:42PM</span>
@@ -139,6 +142,33 @@
                                        onclick="reply(this)">回复</a>
                                 </div>
                             </div>
+                            <div class="comments" th:if="${#arrays.length(comment)}>0">
+                                <div class="comment" th:each="reply :${comment.replyComments}">
+                                    <a class="avatar">
+                                        <img src="../../../static/site/img/head.jpeg" th:src="${reply.avatar}">
+                                    </a>
+                                    <div class="content">
+                                        <a class="author">
+                                            <span  th:text="${reply.nickname}" > Matt</span>
+                                            <div class="ui mini basic orange left pointing label m-padded-tb-mini" th:if="${reply.isAdmin()}">博主</div>
+                                        </a>
+                                        <div class="metadata">
+                                    <span class="date" th:text="${reply.createTime}"
+                                          name="createTime">Today at 5:42PM</span>
+                                        </div>
+
+                                        <div class="text">
+                                            <span th:text="|回复${reply.parentComment.nickname}:|" class="text">小红</span>
+                                            [[${reply.content}]]
+                                        </div>
+                                        <div class="actions">
+                                            <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                                               th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+                                               onclick="reply(this)">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -147,8 +177,8 @@
 
             <form action="" id="form" th:if="${blog.commentAbled}">
                 <div class="required ui form" id="comment-form">
-                    <input type="text" name="blog.id" th:value="${blog.id}">
-                    <input type="text" name="parentComment.id" value="-1">
+                    <input type="hidden" name="blog.id" th:value="${blog.id}">
+                    <input type="hidden" name="parentComment.id" value="-1">
                     <div class="field" id="content-reply">
                         <textarea name="content" placeholder="请输入评论信息..."></textarea>
                     </div>
@@ -156,14 +186,14 @@
                         <div class="field m-mobile-wide m-margin-bottom-small">
                             <div class="ui left icon input">
                                 <i class="user icon"></i>
-                                <input type="text" placeholder="姓名" name="nickname">
+                                <input type="text" placeholder="姓名" name="nickname" th:value="${session.user}!=null ? ${session.user.nickname}">
                             </div>
                         </div>
 
                         <div class="field m-mobile-wide m-margin-bottom-small">
                             <div class="ui left icon input">
                                 <i class="mail icon"></i>
-                                <input type="text" placeholder="邮箱" name="email">
+                                <input type="text" placeholder="邮箱" name="email" th:value="${session.user}!=null ? ${session.user.email}">
                             </div>
                         </div>
                         <div class="field m-mobile-wide m-margin-bottom-small">
@@ -178,31 +208,28 @@
     </div>
 </div>
 <!-- 底部footer -->
-<footer th:replace="_fragments :: footer" class="ui inverted segment vertical m-padded-tb-massive">
+<footer th:fragment="footer" class="ui inverted segment vertical m-padded-tb-massive">
     <div class="ui container center aligned">
         <!--			底部按列排 共18份-->
         <div class="ui divided inverted stackable grid">
             <div class="three wide column">
                 <div class="ui inverted link list">
                     <div class="item">
-                        <img src="../../../static/site/img/footer.png" alt="二维码" class="ui rounded image"
-                             style="width: 100px;">
+                        <img src="../../static/site/img/footer.png" th:src="@{/site/img/footer.png}" alt="二维码" class="ui rounded image" style="width: 100px;">
                     </div>
                 </div>
             </div>
             <div class="four wide column">
-                <h4 class="ui inverted header ">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">用户故事</a>
-                    <a href="#" class="item">用户故事</a>
-                    <a href="#" class="item">用户故事</a>
+                <h4 class="ui inverted header">最新博客</h4>
+                <div class="ui inverted link list" th:each="blog :${updatePageFooter}">
+                    <a th:href="@{/blog/detail(id=${blog.id})}" href="#" class="item" th:text="${blog.title}">用户故事</a>
                 </div>
             </div>
             <div class="four wide column">
                 <h4 class="ui inverted header ">联系我</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">Email: 1872921566@qq.com</a>
-                    <a href="#" class="item">QQ:1872921566</a>
+                    <a href="#" class="item" th:text="#{index.email}">Email: 1872921566@qq.com</a>
+                    <a href="#" class="item" th:text="#{index.QQ}">QQ :1872921566</a>
                 </div>
             </div>
             <div class="five wide column">
@@ -265,7 +292,7 @@
             success: function (res) {
                 console.log(formData);
                 clearcontent();
-                alert("成功");
+                alert("留言成功");
                 window.location.reload();
                 // if(res.data["code"]=="succ"){
                 // 	window.location.reload();

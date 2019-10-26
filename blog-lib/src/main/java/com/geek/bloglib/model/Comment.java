@@ -25,6 +25,9 @@ public class Comment{
     //头像
     private String avatar;
 
+    //是否是管理员
+    private boolean isAdmin;
+
     //@Temporal(TemporalType.TIMESTAMP) 生成日期时间
     private String createTime;
 

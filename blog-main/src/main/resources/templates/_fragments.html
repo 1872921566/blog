@@ -16,12 +16,12 @@
         <div class="ui inverted secondary menu stackable">
             <h2 class="ui orange header item">Zzx-Blog</h2>
             <a href="index.html" th:href="@{/index}" class="m-menu item m-mobile-hide" th:classappend="${n==1} ? 'active' "><i class="mini home icon"></i> 首页</a>
-            <a href="page/type.html" th:href="@{/type}" class="m-menu item m-mobile-hide" th:classappend="${n==2} ? 'active' "><i class="mini idea icon"></i>分类</a>
-            <a href="page/tags.html" th:href="@{/tags}" class="m-menu item m-mobile-hide" th:classappend="${n==3} ? 'active' "><i class="mini tags icon"></i>标签</a>
+            <a href="page/type.html" th:href="@{/type?id=-1}" class="m-menu item m-mobile-hide" th:classappend="${n==2} ? 'active' "><i class="mini idea icon"></i>分类</a>
+            <a href="page/tags.html" th:href="@{/tag?id=-1}" class="m-menu item m-mobile-hide" th:classappend="${n==3} ? 'active' "><i class="mini tags icon"></i>标签</a>
             <a href="page/archives.html" th:href="@{/archives}" class="m-menu item m-mobile-hide" th:classappend="${n==4} ? 'active' "><i class="mini clone icon"></i>归档</a>
             <a href="page/about.html" th:href="@{/about}" class="m-menu item m-mobile-hide" th:classappend="${n==5} ? 'active' "><i class="mini info icon"></i>关于我</a>
             <div class=" m-menu right item m-mobile-hide">
-                <form name="form_search" action="#" th:action="@{/search}" target="_blank">
+                <form name="form_search" action="#" th:action="@{/search}">
                     <div class="ui icon input transparent inverted">
                           <input type="text" name="query" placeholder="Seach...." th:value="${query}">
                         <i onclick="document.forms['form_search'].submit()" class="search icon link"></i>
@@ -47,18 +47,17 @@
                     </div>
                 </div>
             </div>
-            <div class="four wide column">
-                <h4 class="ui inverted header " >最新博客</h4>
+            <div class="four wide column" id="blog-footer">
+                <h4 class="ui inverted header ">最新博客</h4>
                 <div class="ui inverted link list" >
-                    <a href="#" class="item">用户故事</a>
                     <a href="#" class="item">用户故事</a>
                 </div>
             </div>
             <div class="four wide column">
-                <h4 class="ui inverted header ">联系我</h4>
+                <h4 class="ui inverted header">联系我</h4>
                 <div class="ui inverted link list">
-                    <a href="#" class="item">Email: 1872921566@qq.com</a>
-                    <a href="#" class="item">QQ:1872921566</a>
+                    <a href="#" class="item" th:text="#{index.email}">Email: 1872921566@qq.com</a>
+                    <a href="#" class="item" th:text="#{index.QQ}">QQ:1872921566</a>
                 </div>
             </div>
             <div class="five wide column">
@@ -85,5 +84,6 @@
     <script src="../../static/site/js/fun.js" th:src="@{/site/js/fun.js}"></script>
     <script src="../../../static/lib/editor/editormd.min.js" th:src="@{/lib/editor/editormd.min.js}"></script>
     <script src="../../../static/admin/js/admin_fun.js" th:src="@{/admin/js/admin_fun.js}"></script>
+
 </th:block>
 </html>
