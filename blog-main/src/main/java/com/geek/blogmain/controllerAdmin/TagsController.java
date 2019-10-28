@@ -64,7 +64,7 @@ public class TagsController {
     @PostMapping("/tag/save")
     public String  save(Tag tag,RedirectAttributes attributes,@RequestParam String id){
         if(id.length()==0){
-            tag.setId(IDUtils.UUID());
+            tag.setId(IDUtils.UUID());  
             Tag save = service.save(tag);
             if(save==null){
                 attributes.addFlashAttribute("message","标签新建失败");
